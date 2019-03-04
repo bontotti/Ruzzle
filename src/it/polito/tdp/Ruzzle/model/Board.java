@@ -70,6 +70,32 @@ public class Board {
 			this.cells.get(p).set(letter); 
 		}
 	}
+	
+	/**
+	 * Crea una nuova scacchiera generando lettere statisticamente sensate
+	 */
+	public void resetWithFrequencies(Map<Character,Integer> frequencies) {
+		
+		
+		for(Pos p: this.positions) {
+			// draw a random number
+			int pos = (int)(Math.random()*100000) ;
+
+			// find the corresponding letter
+			int cnt=0 ;
+			for(Character let: frequencies.keySet()) {
+				int thisfreq = frequencies.get(let) ;
+				if(cnt+thisfreq>pos) {
+					String letter = Character.toString(let) ;
+					this.cells.get(p).set(letter); 
+					break ;
+				}
+				cnt = cnt + thisfreq ;
+			}
+
+		}
+	}
+
 
 	public List<Pos> getAdiacenti(Pos ultima) {
 		List<Pos> result = new ArrayList<>() ;

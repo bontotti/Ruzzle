@@ -113,10 +113,11 @@ public class RuzzleController {
 
 		List<Pos> percorso = model.trovaParola(parola);
 
+		for (Button b : letters.values()) {
+			b.setDefaultButton(false);
+		}
+		
 		if (percorso != null) {
-			for (Button b : letters.values()) {
-				b.setDefaultButton(false);
-			}
 			for (Pos p : percorso) {
 				letters.get(p).setDefaultButton(true);
 			}
@@ -129,6 +130,10 @@ public class RuzzleController {
 	@FXML
 	void handleReset(ActionEvent event) {
 		model.reset();
+		for (Button b : letters.values()) {
+			b.setDefaultButton(false);
+		}
+		txtResult.clear(); 
 
 	}
 	
@@ -136,6 +141,11 @@ public class RuzzleController {
 	void handleRisolvi(ActionEvent event) {
 		
 		List<String> tutte = model.trovaTutte() ;
+		
+		for (Button b : letters.values()) {
+			b.setDefaultButton(false);
+		}
+
 		
 		txtResult.clear(); 
 		txtResult.appendText(String.format("Trovate %d soluzioni\n", tutte.size()));
